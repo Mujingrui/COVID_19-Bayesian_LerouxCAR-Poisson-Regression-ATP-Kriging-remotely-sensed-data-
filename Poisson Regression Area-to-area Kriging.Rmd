@@ -1,0 +1,45 @@
+---
+title: "Poisson Regression Area-to-area Kriging"
+author: "Jingrui MU"
+date: "03/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Materials and Methods
+###   Data
+* Infected cases in public health units 
+* Population in each unit and 2016 Canadian Census data
+* Population in each 15*15 $km^2$ cell 
+* Distribution of the population (65 years and over) in each 15*15 cell
+* Proportion of apartment in a building that has five or more storeys in total occupied private dwellings by structural type of dwelling in each 15*15 cell
+* Proportion of other attached dwelling in total occupied private dwellings by structural type of dwelling in each 15*15 cell
+* Proportion of apartment in a building that has fewer than five storeys in total occupied private dwellings by structural type of dwelling in each 15*15 cell
+* Average household size in each 15*15 cell
+* Prevalence of low income in age group 0-17 years in each 15*15 cell
+* Prevalence of low income in age group 18-64 years in each 15*15 cell
+* Prevalence of low income in age group 65+ years in each 15*15 cell
+* Proportion of self-employed workers in all classes
+of workers aged 15 years and over in each 15*15 cell
+* Proportion of health occupations in all occupations aged 15
+years and over in each 15*15 cell
+
+###   Methods
+
+$$log(D(v_\alpha)) = log(P) + \beta X + w(v_\alpha)$$
+Where:
+* $D(v_\alpha)$ represents the number of COVID-19 cases in each public health unit
+* $P$ means the population size in each area
+* X represents the COVID-19 relevant indicators
+* $w(v_\alpha)$ is the residual value in each area
+
+Using Area-to-area Kriging to extimate residual value in each point $w(u_s)$ and plug these point values into:
+$$log(D(u_s)) = log(P) + \beta_s X(u_s) + w(u_s)$$
+Here:
+* $D(u_s)$ means the infected cases in each point
+* $X(u_s)$ means the COVID-19 relevant indicators value in each point, which are from the 15*15 $km^2$ cells dataset in the material
+
+
