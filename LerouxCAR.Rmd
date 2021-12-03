@@ -1,0 +1,31 @@
+---
+title: "LerouxCAR"
+author: "Jingrui MU"
+date: "03/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Model Assumptions
+
+* $y_{it}$ ~ Poisson($\mu_{it}$) 
+* $log(\mu_{it}) = \alpha + \beta X+ \xi_i + \phi_t + \gamma_t + \delta_{it}$
+* $\xi_i$ ~ N(0,$D_s(\sigma_s^2, \lambda_s)$)
+* $D_s = \sigma_s^2(\lambda_sR_s+(1-\lambda_s)I_s)^{-1}$
+* $\xi_i|\xi_{j \neq i}$ ~ $N(\frac{\lambda_s}{1-\lambda_s +\lambda_s m_i}\sum_{i\sim j}\xi_i, \frac{\sigma_s^2}{1-\lambda_s+\lambda_sm_i})$
+
+Note: $\lambda_s$ is a spatial smoothing parameter taking values between 0 and 1. When $\lambda_s$ = 0, the Leroux CAR prior reduced to an exchangeable prior $\xi \sim N(0,\sigma_s^2I_n)$, and when $\lambda_s$ = 1, it is the iCAR model, $\xi \sim N(0,\sigma_s^2R_s^{-})$.
+
+
+## Comapring with Bayesian Spatial-temporal BYM model 
+
+| Interaction Types | DIC(BYM) | WAIC(BYM) | DIC(LerouxCAR) | WAIC(LerouxCAR) |
+| :-----: | :----: | :----: | :----: | :----: |
+| Type I | 10955.28 | 10725.72 |11437.41 | 12216.00|
+| Type II | 10500.96 | 10423.03 | 11477.06 | 11461.53 |
+| Type III | 10958.64 | 10730.84 | 11448.15 | 11238.12 |
+| Type IV | 10548.43 | 10485.31 | 11561.73 | 11623.88 |
+
